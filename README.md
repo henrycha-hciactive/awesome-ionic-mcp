@@ -189,19 +189,20 @@ The server supports optional environment variables for enhanced functionality:
 {
   "mcpServers": {
     "awesome-ionic-mcp": {
-      "type": "stdio"
+      "type": "stdio",
       "command": "npx",
       "args": ["-y", "awesome-ionic-mcp@latest"],
       "env": {
-        "GITHUB_TOKEN": "ghp_your_token_here"
+        "GITHUB_TOKEN": "ghp_your_token_here",
+        "MCP_QUIET": "true"
       },
-       "alwaysAllow": [
-      "get_ionic_component_definition",
-      "get_all_ionic_components",
-      "get_component_api",
-      "get_all_official_plugins",
-      "get_official_plugin_api"
-    ],
+      "alwaysAllow": [
+        "get_ionic_component_definition",
+        "get_all_ionic_components",
+        "get_component_api",
+        "get_all_official_plugins",
+        "get_official_plugin_api"
+      ]
     }
   }
 }
@@ -212,7 +213,8 @@ The server supports optional environment variables for enhanced functionality:
 
 **When to use:** If you want minimal logging output
 
-**Configuration example:**
+Add it next to your other environment variables (see the `GITHUB_TOKEN` example above). To enable quiet mode only:
+
 ```json
 {
   "mcpServers": {
