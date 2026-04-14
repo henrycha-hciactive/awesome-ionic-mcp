@@ -239,5 +239,16 @@ export function cleanSchema(schema: Record<string, any>): Record<string, any> {
   }
 
   const result = deepClean(schema, true); // Pass true for isRootLevel
-  return result === null ? {} : result;
+  const base = result === null ? {} : result;
+
+  // MCP tool `inputSchema` must be a JSON Schema object whose root `type` is the string "object".
+  // zodToJsonSchema + deepClean can yield `{}` or omit `type`, which strict MCP clients reject.
+  if (base.type !== "object") {
+    const properties =
+      base.properties && typeof base.properties === "object"
+        ? base.properties
+        : {};
+    return { ...base, type: "object", properties };
+  }
+  return base;
 }
